@@ -21,10 +21,12 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
     def draw(self, surface):
+        # Draws players
         pygame.draw.circle(surface, self.color, (self.x, self.y), self.radius)
+        # Draws circle in the direction the player is facing
         pygame.draw.circle(
             surface,
-            (255, 255, 255),
+            (0, 0, 255),
             (
                 int(self.x + math.cos(self.direction) * self.radius),
                 int(self.y + math.sin(self.direction) * self.radius),
@@ -79,6 +81,7 @@ class Player(pygame.sprite.Sprite):
                         clipping_with_any = True
 
                 current_direction = math.atan2(otherPlayer.y - self.y, otherPlayer.x - self.x)
+                # This is 20 degrees of the player's direction in either direction
                 if not clipping_with_any and (
                     abs(current_direction - self.direction) < math.pi / 9
                     or abs(current_direction - self.direction) > 2 * math.pi - math.pi / 9
