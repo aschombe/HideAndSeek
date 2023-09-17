@@ -4,20 +4,18 @@ import os
 import model_manager
 import game
 
-seekers = model_manager.manager(100)
-hiders = model_manager.manager(100)
+seekers = model_manager.manager(10)
+hiders = model_manager.manager(10)
 
-current_time = time.strftime("%H-%M-%S", time.localtime())
-print("Time:", time.strftime("%H:%M:%S", time.localtime()))
-print("Date:", time.strftime("%d/%m/%Y", time.localtime()))
-best_model_dir = f"models/best_model_{current_time}"
-os.mkdir(best_model_dir)
+# current_time = time.strftime("%H-%M-%S", time.localtime())
+# print("Time:", time.strftime("%H:%M:%S", time.localtime()))
+# print("Date:", time.strftime("%d/%m/%Y", time.localtime()))
+# best_model_dir = f"models/best_model_{current_time}"
+# os.mkdir(best_model_dir)
 
 for generation in range(100):
-    print("Starting mutation")
-    seekers.mutate_models(5)
-    hiders.mutate_models(5)
-    print("Finished mutation")
+    seekers.mutate_models(2)
+    hiders.mutate_models(2)
 
     if generation % 10 == 0:
         s = seekers.get_models()[-1]
@@ -25,9 +23,8 @@ for generation in range(100):
         t = game.run(s, h, True)
         print(f"Seeker:, {-t}")
         print(f"Hider:, {t}")
-        s.save(f"{best_model_dir}/seeker{generation}")
-        h.save(f"{best_model_dir}/hider{generation}")
-        
+        # s.save(f"{best_model_dir}/seeker{generation}")
+        # h.save(f"{best_model_dir}/hider{generation}")
 
     # Run the seekers and hiders
     seeker_fitness = []
@@ -37,13 +34,17 @@ for generation in range(100):
         seeker_fitness.append(-runtime)
         hider_fitness.append(runtime)
 
-    seekers.set_fitness(seeker_fitness)
-    hiders.set_fitness(hider_fitness)
+    if generation == 0:
+        seekers.set_fitness(seeker_fitness)
+        hiders.set_fitness(hider_fitness)
+    else:
+        seekers.update_fitness(seeker_fitness)
+        hiders.update_fitness(hider_fitness)
 
     # Sort the seekers and hiders by fitness
     # get the best 100 seekers and hiders
-    seekers.get_n_best_models(100)
-    hiders.get_n_best_models(100)
+    seekers.get_n_best_models(10)
+    hiders.get_n_best_models(10)
 
     # Print status
     print("Generation", generation)
@@ -51,7 +52,7 @@ for generation in range(100):
     # print the best hider and seeker fitness for this generation
     # print("S: ", seekers.get_n_best_models(1)[0].get_fitness()[0])
     # print("H: ", hiders.get_n_best_models(1)[0].get_fitness()[0])
-    
+
     # print("Seekers:", seekers_fitness)
     # print("Hiders:", hiders_fitness)
     # print("Seekers:", seekers)
