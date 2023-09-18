@@ -4,18 +4,18 @@ import os
 import model_manager
 import game
 
-seekers = model_manager.manager(10)
-hiders = model_manager.manager(10)
+seekers = model_manager.manager(300)
+hiders = model_manager.manager(300)
 
-# current_time = time.strftime("%H-%M-%S", time.localtime())
-# print("Time:", time.strftime("%H:%M:%S", time.localtime()))
-# print("Date:", time.strftime("%d/%m/%Y", time.localtime()))
-# best_model_dir = f"models/best_model_{current_time}"
-# os.mkdir(best_model_dir)
+current_time = time.strftime("%H-%M-%S", time.localtime())
+print("Time:", time.strftime("%H:%M:%S", time.localtime()))
+print("Date:", time.strftime("%d/%m/%Y", time.localtime()))
+best_model_dir = f"models/best_model_{current_time}"
+os.mkdir(best_model_dir)
 
 for generation in range(100):
-    seekers.mutate_models(2)
-    hiders.mutate_models(2)
+    seekers.mutate_models(10)
+    hiders.mutate_models(10)
 
     if generation % 10 == 0:
         s = seekers.get_models()[-1]
@@ -23,8 +23,8 @@ for generation in range(100):
         t = game.run(s, h, True)
         print(f"Seeker:, {-t}")
         print(f"Hider:, {t}")
-        # s.save(f"{best_model_dir}/seeker{generation}")
-        # h.save(f"{best_model_dir}/hider{generation}")
+        s.save(f"{best_model_dir}/seeker{generation}")
+        h.save(f"{best_model_dir}/hider{generation}")
 
     # Run the seekers and hiders
     seeker_fitness = []
@@ -43,8 +43,8 @@ for generation in range(100):
 
     # Sort the seekers and hiders by fitness
     # get the best 100 seekers and hiders
-    seekers.get_n_best_models(10)
-    hiders.get_n_best_models(10)
+    seekers.get_n_best_models(100)
+    hiders.get_n_best_models(100)
 
     # Print status
     print("Generation", generation)
