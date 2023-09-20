@@ -1,20 +1,15 @@
 import numpy as np
 
-
 # def relu(x):
 #     return np.where(x > 0, x, [x, 0])
-
 
 def relu(x):
     return np.maximum(0, x)
 
-
 def tanh(x):
     return np.tanh(x)
 
-
 scalar = 1
-
 
 class Model:
     def __init__(self) -> None:
@@ -130,3 +125,31 @@ class Model:
         )
         m.set_weights(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10)
         return m
+    
+    def save(self, filename):
+        np.savez(
+            filename,
+            self.weights1,
+            self.weights2,
+            self.weights3,
+            self.weights4,
+            self.weights5,
+            self.weights6,
+            self.weights7,
+            self.weights8,
+            self.weights9,
+            self.weights10,
+        )
+
+    def load(self, filename):
+        data = np.load(filename + ".npz")
+        self.weights1 = data["arr_0"]
+        self.weights2 = data["arr_1"]
+        self.weights3 = data["arr_2"]
+        self.weights4 = data["arr_3"]
+        self.weights5 = data["arr_4"]
+        self.weights6 = data["arr_5"]
+        self.weights7 = data["arr_6"]
+        self.weights8 = data["arr_7"]
+        self.weights9 = data["arr_8"]
+        self.weights10 = data["arr_9"]

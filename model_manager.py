@@ -34,53 +34,53 @@ class manager:
     def get_models(self):
         return self.list
 
-    def save(self, filename):
-        for i, model in enumerate(self.list):
-            np.savez(
-                filename + str(i),
-                model.weights1,
-                model.weights2,
-                model.weights3,
-                model.weights4,
-                model.weights5,
-                model.weights6,
-                model.weights7,
-                model.weights8,
-                model.weights9,
-                model.weights10,
-            )
+    # def save(self, filename):
+    #     for i, model in enumerate(self.list):
+    #         np.savez(
+    #             filename + str(i),
+    #             model.weights1,
+    #             model.weights2,
+    #             model.weights3,
+    #             model.weights4,
+    #             model.weights5,
+    #             model.weights6,
+    #             model.weights7,
+    #             model.weights8,
+    #             model.weights9,
+    #             model.weights10,
+    #         )
 
-    def load(self, filename):
-        i = 0
-        while True:
-            try:
-                data = np.load(filename + str(i) + ".npz")
-                self.weights1 = data["arr_0"]
-                self.weights2 = data["arr_1"]
-                self.weights3 = data["arr_2"]
-                self.weights4 = data["arr_3"]
-                self.weights5 = data["arr_4"]
-                self.weights6 = data["arr_5"]
-                self.weights7 = data["arr_6"]
-                self.weights8 = data["arr_7"]
-                self.weights9 = data["arr_8"]
-                self.weights10 = data["arr_9"]
-                self.list = np.append(self.list, rlfs.Model())
-                self.list[i].set_weights(
-                    self.weights1,
-                    self.weights2,
-                    self.weights3,
-                    self.weights4,
-                    self.weights5,
-                    self.weights6,
-                    self.weights7,
-                    self.weights8,
-                    self.weights9,
-                    self.weights10,
-                )
-                i += 1
-            except FileNotFoundError:
-                break
+    # def load(self, filename):
+    #     i = 0
+    #     while True:
+    #         try:
+    #             data = np.load(filename + str(i) + ".npz")
+    #             self.weights1 = data["arr_0"]
+    #             self.weights2 = data["arr_1"]
+    #             self.weights3 = data["arr_2"]
+    #             self.weights4 = data["arr_3"]
+    #             self.weights5 = data["arr_4"]
+    #             self.weights6 = data["arr_5"]
+    #             self.weights7 = data["arr_6"]
+    #             self.weights8 = data["arr_7"]
+    #             self.weights9 = data["arr_8"]
+    #             self.weights10 = data["arr_9"]
+    #             self.list = np.append(self.list, rlfs.Model())
+    #             self.list[i].set_weights(
+    #                 self.weights1,
+    #                 self.weights2,
+    #                 self.weights3,
+    #                 self.weights4,
+    #                 self.weights5,
+    #                 self.weights6,
+    #                 self.weights7,
+    #                 self.weights8,
+    #                 self.weights9,
+    #                 self.weights10,
+    #             )
+    #             i += 1
+    #         except FileNotFoundError:
+    #             break
 
     def __len__(self):
         return len(self.list)
