@@ -68,12 +68,12 @@ while quitting == False:
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
                 left_button_down = True
-            elif event.button == 2:
+            elif event.button == 3:
                 right_button_down = True
         elif event.type == MOUSEBUTTONUP:
             if event.button == 1:
                 left_button_down = False
-            elif event.button == 2:
+            elif event.button == 3:
                 right_button_down = False
         elif event.type == KEYDOWN:
             if event.key == ord('s'):
@@ -201,7 +201,7 @@ while quitting == False:
         mousey = int(math.floor(mousey / grid_size) * grid_size)
         if (mousex, mousey) in walls:
             walls.remove((mousex, mousey))
-            pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))    
+            pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
         # Update the display
         pygame.display.update()
         # Set the frame rate
