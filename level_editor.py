@@ -77,41 +77,34 @@ while quitting == False:
                 right_button_down = False
         elif event.type == KEYDOWN:
             if event.key == ord('s'):
-                # Save the level
-                filename = input('Enter the filename to save the level as: ') 
+                # Save the level as a square grid of 1s and 0s
+                filename = input('Enter the filename to save the level to: ')
 
                 # Create a list of all the grid coordinates
                 grid_coords = []
                 for x in range(0, window_width, grid_size):
                     for y in range(0, window_height, grid_size):
                         grid_coords.append((x, y))
-                        
-                # Create a list of all the walls
-                wall_coords = []
-                for x, y in walls:
-                    wall_coords.append((x, y))
-                    
-                # Create a list of all the empty spaces
-                empty_coords = []
-                for x, y in grid_coords:
-                    if (x, y) not in wall_coords:
-                        empty_coords.append((x, y))
 
-                # Create a list of all the coordinates in the level
+                # Create a list of all the walls
                 level_coords = []
-                for x, y in grid_coords:
-                    if (x, y) in wall_coords:
+                for coord in grid_coords:
+                    if coord in walls:
                         level_coords.append(1)
                     else:
                         level_coords.append(0)
 
-                # Save the level to a text file
+                # Open the level file
+
                 level_file = open(filename, 'w')
-                for i in range(0, len(level_coords), 40):
-                    for j in range(0, 40):
-                        level_file.write(str(level_coords[i + j]))
-                    level_file.write('\n')
+                for i in range(0, len(level_coords)):
+                    level_file.write(str(level_coords[i]))
+                    if (i + 1) % 40 == 0:
+                        level_file.write('\n')
                 level_file.close()
+
+
+
             elif event.key == ord('l'):
                 # Load the level
                 filename = input('Enter the filename to load the level from: ')
@@ -151,6 +144,16 @@ while quitting == False:
     for x, y in grid:
         pygame.draw.rect(window_surface, gray, (x, y, grid_size, grid_size), 1)
 
+
+    # Walls can not be placed in the center of the grid
+    # Gray out the 4 squares in the center of the grid 
+    for x in range(grid_size * 9, grid_size * 11, grid_size):
+        for y in range(grid_size * 9, grid_size * 11, grid_size):
+            pygame.draw.rect(window_surface, gray, (x, y, grid_size, grid_size))
+            walls.remove((x, y)) if (x, y) in walls else None
+
+
+    
     # The outer edges of the grid are walls by default
     for x in range(0, window_width, grid_size):
         pygame.draw.rect(window_surface, red, (x, 0, grid_size, grid_size))
