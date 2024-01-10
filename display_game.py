@@ -53,7 +53,7 @@ while True:
             if event.key == ord('l'):
                 #filename = input('Filename: ')
                 filename = simpledialog.askstring('Filename', 'Enter the name of the level file')
-                if filename != None:
+                if filename != None and filename != '':
                     level_file = open(filename, 'r')
                     level_coord = []
                     for line in level_file:

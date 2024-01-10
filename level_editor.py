@@ -89,7 +89,7 @@ while quitting == False:
             if event.key == ord('s'):
                 # Save the level as a square grid of 1s and 0s
                 filename = simpledialog.askstring('Save Level', 'Enter the filename to save the level to: ')
-
+                
                 # Create a list of all the grid coordinates
                 grid_coords = []
                 for x in range(0, window_width, grid_size):
@@ -114,7 +114,7 @@ while quitting == False:
                 #        level_coords.append(0)
 
                 # Open the level file
-                if filename != None:
+                if filename != None and filename != '':
                     with open(filename, 'w') as level_file:
                         for i in range(0, len(level_coords)):
                             if i % 20 == 0:
@@ -130,7 +130,7 @@ while quitting == False:
                 filename = simpledialog.askstring('Load Level', 'Enter the filename to load the level from: ')
 
                 # Open the level file
-                if filename != None:
+                if filename != None and filename != '':
                     level_file = open(filename, 'r')
                     level_coords = []
                     for line in level_file:
