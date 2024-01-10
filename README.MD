@@ -15,4 +15,4 @@ display_game.py is used for viewing levels and will probably be used for visuali
 
 Keybinds:
 'L' - load,
-'q' - quit
+'Q' - quit
