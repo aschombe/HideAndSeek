@@ -19,6 +19,7 @@ import math
 import pickle
 import time
 import random
+from tkinter import simpledialog
 from pygame.locals import *
     
 # Initialize pygame
@@ -87,7 +88,9 @@ while quitting == False:
         elif event.type == KEYDOWN:
             if event.key == ord('s'):
                 # Save the level as a square grid of 1s and 0s
-                filename = input('Enter the filename to save the level to: ')
+                #filename = input('Enter the filename to save the level to: ')
+                
+                filename = simpledialog.askstring('Save Level', 'Enter the filename to save the level to: ')
 
                 # Create a list of all the grid coordinates
                 grid_coords = []
@@ -121,8 +124,10 @@ while quitting == False:
 
             elif event.key == ord('l'):
                 # Load the level
-                filename = input('Enter the filename to load the level from: ')
+                #filename = input('Enter the filename to load the level from: ')
                 
+                filename = simpledialog.askstring('Load Level', 'Enter the filename to load the level from: ')
+
                 # Open the level file
                 level_file = open(filename, 'r')
                 level_coords = []

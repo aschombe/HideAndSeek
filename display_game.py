@@ -1,4 +1,5 @@
 import pygame
+from tkinter import simpledialog
 from pygame.locals import *
 
 pygame.init()
@@ -46,9 +47,12 @@ while True:
             pygame.quit()
             exit()
         if event.type == KEYDOWN:
+            if event.key == ord('q'):
+                pygame.quit()
+                exit()
             if event.key == ord('l'):
-                filename = input('Filename: ')
-
+                #filename = input('Filename: ')
+                filename = simpledialog.askstring('Filename', 'Enter the name of the level file')
                 level_file = open(filename, 'r')
                 level_coord = []
                 for line in level_file:
