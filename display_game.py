@@ -53,23 +53,24 @@ while True:
             if event.key == ord('l'):
                 #filename = input('Filename: ')
                 filename = simpledialog.askstring('Filename', 'Enter the name of the level file')
-                level_file = open(filename, 'r')
-                level_coord = []
-                for line in level_file:
-                    for char in line:
-                        if char != '\n':
-                            level_coord.append(int(char))
-                level_file.close()
+                if filename != None:
+                    level_file = open(filename, 'r')
+                    level_coord = []
+                    for line in level_file:
+                        for char in line:
+                            if char != '\n':
+                                level_coord.append(int(char))
+                    level_file.close()
 
-                grid_coords = []
-                for x in range(0, window_width, grid_size):
-                    for y in range(0, window_height, grid_size):
-                        grid_coords.append((x, y))
+                    grid_coords = []
+                    for x in range(0, window_width, grid_size):
+                        for y in range(0, window_height, grid_size):
+                            grid_coords.append((x, y))
 
-                walls = []
-                for i in range(len(level_coord)):
-                    if level_coord[i] == 1:
-                        walls.append(grid_coords[i])
+                    walls = []
+                    for i in range(len(level_coord)):
+                        if level_coord[i] == 1:
+                            walls.append(grid_coords[i])
 
     # Fill the background
     window_surface.fill(white)
