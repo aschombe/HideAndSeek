@@ -1,2 +1,0 @@
-Level Editor:
-Cant load when seekers or hiders are present

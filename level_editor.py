@@ -114,7 +114,7 @@ while quitting == False:
 
                 # Open the level file
                 with open(filename, 'w') as level_file:
-                    for i in range(0, len(level_coords)//2):
+                    for i in range(0, len(level_coords)):
                         if i % 20 == 0:
                             level_file.write('\n')
                         level_file.write(str(level_coords[i]))
@@ -193,12 +193,12 @@ while quitting == False:
         pygame.draw.rect(window_surface, red, (x, y, grid_size, grid_size))
 
     # Draw the hiders
-    for x, y in hiders:
-        pygame.draw.rect(window_surface, blue, (x, y, grid_size, grid_size))
+    #for x, y in hiders:
+    #    pygame.draw.rect(window_surface, blue, (x, y, grid_size, grid_size))
 
     # Draw the seekers
-    for x, y in seekers:
-        pygame.draw.rect(window_surface, green, (x, y, grid_size, grid_size))
+    #for x, y in seekers:
+    #    pygame.draw.rect(window_surface, green, (x, y, grid_size, grid_size))
 
     # Draw a wall at the mouse position as long as the mouse is held down
     while left_button_down:
@@ -235,13 +235,13 @@ while quitting == False:
             walls.remove((mousex, mousey))
             pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
         # Remove a hider at the mouse position
-        if (mousex, mousey) in hiders:
-            hiders.remove((mousex, mousey))
-            pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
+        #if (mousex, mousey) in hiders:
+        #    hiders.remove((mousex, mousey))
+        #    pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
         # Remove a seeker at the mouse position
-        if (mousex, mousey) in seekers:
-            seekers.remove((mousex, mousey))
-            pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
+        #if (mousex, mousey) in seekers:
+        #    seekers.remove((mousex, mousey))
+        #    pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
         #if (mousex, mousey) in walls:
         #    walls.remove((mousex, mousey))
         #    pygame.draw.rect(window_surface, black, (mousex, mousey, grid_size, grid_size))
