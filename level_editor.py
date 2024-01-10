@@ -88,8 +88,6 @@ while quitting == False:
         elif event.type == KEYDOWN:
             if event.key == ord('s'):
                 # Save the level as a square grid of 1s and 0s
-                #filename = input('Enter the filename to save the level to: ')
-                
                 filename = simpledialog.askstring('Save Level', 'Enter the filename to save the level to: ')
 
                 # Create a list of all the grid coordinates
@@ -116,11 +114,14 @@ while quitting == False:
                 #        level_coords.append(0)
 
                 # Open the level file
-                with open(filename, 'w') as level_file:
-                    for i in range(0, len(level_coords)):
-                        if i % 20 == 0:
-                            level_file.write('\n')
-                        level_file.write(str(level_coords[i]))
+                if filename != None:
+                    with open(filename, 'w') as level_file:
+                        for i in range(0, len(level_coords)):
+                            if i % 20 == 0:
+                                level_file.write('\n')
+                            level_file.write(str(level_coords[i]))
+                else:
+                    pass
 
             elif event.key == ord('l'):
                 # Load the level
@@ -129,34 +130,35 @@ while quitting == False:
                 filename = simpledialog.askstring('Load Level', 'Enter the filename to load the level from: ')
 
                 # Open the level file
-                level_file = open(filename, 'r')
-                level_coords = []
-                for line in level_file:
-                    for char in line:
-                        if char != '\n':
-                            level_coords.append(int(char))
-                level_file.close()
+                if filename != None:
+                    level_file = open(filename, 'r')
+                    level_coords = []
+                    for line in level_file:
+                        for char in line:
+                            if char != '\n':
+                                level_coords.append(int(char))
+                    level_file.close()
                 
-                # Create a list of all the grid coordinates
-                grid_coords = []
-                for x in range(0, window_width, grid_size):
-                    for y in range(0, window_height, grid_size):
-                        grid_coords.append((x, y))
+                    # Create a list of all the grid coordinates
+                    grid_coords = []
+                    for x in range(0, window_width, grid_size):
+                        for y in range(0, window_height, grid_size):
+                            grid_coords.append((x, y))
 
-                # Create a list of all the walls
-                walls = []
-                for i in range(0, len(level_coords)):
-                    if level_coords[i] == 1:
-                        walls.append(grid_coords[i])
+                    # Create a list of all the walls
+                    walls = []
+                    for i in range(0, len(level_coords)):
+                        if level_coords[i] == 1:
+                            walls.append(grid_coords[i])
                 
-                # Create a list of all the players (seeers are 2, hiders are 3)
-                #seekers = []
-                #hiders = []
-                #for i in range(0, len(level_coords)):
-                #    if level_coords[i] == 2:
-                #        seekers.append(grid_coords[i])
-                #    elif level_coords[i] == 3:
-                #        hiders.append(grid_coords[i])
+                    # Create a list of all the players (seeers are 2, hiders are 3)
+                    #seekers = []
+                    #hiders = []
+                    #for i in range(0, len(level_coords)):
+                    #    if level_coords[i] == 2:
+                    #        seekers.append(grid_coords[i])
+                    #    elif level_coords[i] == 3:
+                    #        hiders.append(grid_coords[i])
 
             elif event.key == ord('c'):
                 # Clear the level
