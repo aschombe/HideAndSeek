@@ -61,8 +61,8 @@ left_button_down = False
 right_button_down = False
 
 # Set up the players
-seekers = []
-hiders = []
+#seekers = []
+#hiders = []
 
 quitting = False
 
@@ -102,25 +102,22 @@ while quitting == False:
                         level_coords.append(1)
                     else:
                         level_coords.append(0)
-
+                
                 # Create a list of all the players (seeers are 2, hiders are 3)
-                for coord in grid_coords:
-                    if coord in seekers:
-                        level_coords.append(2)
-                    elif coord in hiders:
-                        level_coords.append(3)
-                    else:
-                        level_coords.append(0)
+                #for coord in grid_coords:
+                #    if coord in seekers:
+                #        level_coords.append(2)
+                #    elif coord in hiders:
+                #        level_coords.append(3)
+                #    else:
+                #        level_coords.append(0)
 
                 # Open the level file
-                level_file = open(filename, 'w')
-                for i in range(0, len(level_coords)):
-                    level_file.write(str(level_coords[i]))
-                    if (i + 1) % 40 == 0:
-                        level_file.write('\n')
-                level_file.close()
-
-
+                with open(filename, 'w') as level_file:
+                    for i in range(0, len(level_coords)//2):
+                        if i % 20 == 0:
+                            level_file.write('\n')
+                        level_file.write(str(level_coords[i]))
 
             elif event.key == ord('l'):
                 # Load the level
@@ -148,13 +145,13 @@ while quitting == False:
                         walls.append(grid_coords[i])
                 
                 # Create a list of all the players (seeers are 2, hiders are 3)
-                seekers = []
-                hiders = []
-                for i in range(0, len(level_coords)):
-                    if level_coords[i] == 2:
-                        seekers.append(grid_coords[i])
-                    elif level_coords[i] == 3:
-                        hiders.append(grid_coords[i])
+                #seekers = []
+                #hiders = []
+                #for i in range(0, len(level_coords)):
+                #    if level_coords[i] == 2:
+                #        seekers.append(grid_coords[i])
+                #    elif level_coords[i] == 3:
+                #        hiders.append(grid_coords[i])
 
             elif event.key == ord('c'):
                 # Clear the level
@@ -266,21 +263,21 @@ while quitting == False:
                     break
 
     # Add a hider at the mouse position when 'z' is pressed
-    keys = pygame.key.get_pressed()
-    if keys[K_z]:
-        mousex = int(math.floor(mousex / grid_size) * grid_size)
-        mousey = int(math.floor(mousey / grid_size) * grid_size)
-        if (mousex, mousey) not in walls and (mousex, mousey) not in seekers and (mousex, mousey) not in hiders:
-            hiders.append((mousex, mousey))
-            pygame.draw.rect(window_surface, blue, (mousex, mousey, grid_size, grid_size))
+    #keys = pygame.key.get_pressed()
+    #if keys[K_z]:
+    #    mousex = int(math.floor(mousex / grid_size) * grid_size)
+    #    mousey = int(math.floor(mousey / grid_size) * grid_size)
+    #    if (mousex, mousey) not in walls and (mousex, mousey) not in seekers and (mousex, mousey) not in hiders:
+    #        hiders.append((mousex, mousey))
+    #        pygame.draw.rect(window_surface, blue, (mousex, mousey, grid_size, grid_size))
 
     # Add a seeker at the mouse position when 'x' is pressed
-    if keys[K_x]:
-        mousex = int(math.floor(mousex / grid_size) * grid_size)
-        mousey = int(math.floor(mousey / grid_size) * grid_size)
-        if (mousex, mousey) not in walls and (mousex, mousey) not in seekers and (mousex, mousey) not in hiders:
-            seekers.append((mousex, mousey))
-            pygame.draw.rect(window_surface, green, (mousex, mousey, grid_size, grid_size))
+    #if keys[K_x]:
+    #    mousex = int(math.floor(mousex / grid_size) * grid_size)
+    #    mousey = int(math.floor(mousey / grid_size) * grid_size)
+    #    if (mousex, mousey) not in walls and (mousex, mousey) not in seekers and (mousex, mousey) not in hiders:
+    #        seekers.append((mousex, mousey))
+    #        pygame.draw.rect(window_surface, green, (mousex, mousey, grid_size, grid_size))
 
     # Update the display
     pygame.display.update()
