@@ -1,4 +1,5 @@
 import pygame
+from Player import Player
 from tkinter import simpledialog
 from pygame.locals import *
 
@@ -24,14 +25,6 @@ for x in range(0, window_width, grid_size):
 
 # Walls
 walls = []
-
-# Players
-class Player:
-    def __init__(self, color, position, radius, vision_cone):
-        self.color = color
-        self.position = position
-        self.radius = radius
-        self.vision_cone = vision_cone
 
 players = []
 players.append(Player((0, 0, 255), (400, 400), 20, [(400, 400), (400, 380), (420, 400)]))

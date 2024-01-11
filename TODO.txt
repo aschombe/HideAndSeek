@@ -1,0 +1,5 @@
+Level Editor:
+Loading with hiders and seekers causes error
+
+Display Game:
+Can't display hiders and seekers properly yet
