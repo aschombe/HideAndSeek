@@ -1,7 +1,6 @@
 # Players
 class Player:
-    def __init__(self, color, position, radius, vision_cone):
+    def __init__(self, position, color):
         self.color = color
         self.position = position
-        self.radius = radius
-        self.vision_cone = vision_cone
+        self.radius = 20

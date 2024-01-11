@@ -26,9 +26,8 @@ for x in range(0, window_width, grid_size):
 # Walls
 walls = []
 
-players = []
-players.append(Player((0, 0, 255), (400, 400), 20, [(400, 400), (400, 380), (420, 400)]))
-
+hiders = []
+seekers = []
 
 # Clock
 clock = pygame.time.Clock()
@@ -65,6 +64,13 @@ while True:
                         if level_coord[i] == 1:
                             walls.append(grid_coords[i])
 
+                    for i in range(len(level_coord)):
+                        if level_coord[i] == 2:
+                            # player is position, color
+                            hiders.append(Player(grid_coords[i], (0, 255, 0)))
+                        elif level_coord[i] == 3:
+                            seekers.append(Player(grid_coords[i], (0, 0, 255)))
+
     # Fill the background
     window_surface.fill(white)
 
@@ -76,10 +82,14 @@ while True:
     for x, y in walls:
         pygame.draw.rect(window_surface, red, (x, y, grid_size, grid_size))
 
-    # Draw players (pygame sprites) as circles with a vision cone to denote direction
-    for player in players:
+    # Draw players (pygame sprites) as circles
+    for player in hiders:
         pygame.draw.circle(window_surface, player.color, player.position, player.radius)
-        pygame.draw.polygon(window_surface, player.color, player.vision_cone)
+    for player in seekers:
+        pygame.draw.circle(window_surface, player.color, player.position, player.radius)
+
+    #for player in players:
+    #    pygame.draw.circle(window_surface, player.color, player.position, player.radius)
 
     # Update the display
     pygame.display.update()
