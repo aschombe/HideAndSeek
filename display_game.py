@@ -72,11 +72,11 @@ while True:
                             seekers.append(Player(grid_coords[i], (0, 0, 255)))
 
     # Fill the background
-    window_surface.fill(white)
+    window_surface.fill(black)
 
     # Draw grid
     for x, y in grid:
-        pygame.draw.rect(window_surface, black, (x, y, grid_size, grid_size), 1)
+        pygame.draw.rect(window_surface, white, (x, y, grid_size, grid_size), 1)
 
     # Draw walls
     for x, y in walls:
