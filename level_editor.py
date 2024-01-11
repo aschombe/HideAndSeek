@@ -1,24 +1,6 @@
-# This is the level editor.  It allows users to place walls in a level and save.
-# It also allows users to load levels and remove walls.
-# left click draws walls, right click removes walls.
-# z adds a hider, x adds a seeker.
-# right click on a hider or seeker removes it.
-# Pressing 's' saves the level, pressing 'l' loads the level.
-# Pressing 'c' clears the level.
-# Pressing 'q' quits the program.
-
-
-# The level editor will just be a box with a grid.  The user can click on the grid
-# to place walls.  The walls will be saved in a list of tuples, where each tuple
-# is a coordinate pair.  The level editor will use keyboard shortcuts to save and
-# load levels.  The level editor will also have a key to clear the level.
-
 import pygame
 import sys
 import math
-import pickle
-import time
-import random
 from tkinter import simpledialog
 from pygame.locals import *
     
