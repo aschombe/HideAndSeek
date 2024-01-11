@@ -136,12 +136,12 @@ while quitting == False:
                     # Create a list of all the players (seeers are 2, hiders are 3)
                     seekers = []
                     hiders = []
-                    for i in range(0, len(level_coords)):
+                    for i in range(0, len(level_coords)): 
                         if level_coords[i] == 2:
                             seekers.append(grid_coords[i])
                         elif level_coords[i] == 3:
                             hiders.append(grid_coords[i])
-                    
+
             elif event.key == ord('c'):
                 # Clear the level
                 walls = []
