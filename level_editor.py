@@ -78,22 +78,26 @@ while quitting == False:
                     for y in range(0, window_height, grid_size):
                         grid_coords.append((x, y))
 
-                # Create a list of all the walls
+                # Create a list of all the walls and players (walls are 1, seekers are 2, hiders are 3)
                 level_coords = []
                 for coord in grid_coords:
                     if coord in walls:
                         level_coords.append(1)
-                    else:
-                        level_coords.append(0)
-                
-                # Create a list of all the players (seekers are 2, hiders are 3)
-                for coord in grid_coords:
-                    if coord in seekers:
+                    elif coord in seekers:
                         level_coords.append(2)
                     elif coord in hiders:
                         level_coords.append(3)
                     else:
                         level_coords.append(0)
+                
+                # Create a list of all the players (seekers are 2, hiders are 3)
+                #for coord in grid_coords:
+                #    if coord in seekers:
+                #        level_coords.append(2)
+                #    elif coord in hiders:
+                #        level_coords.append(3)
+                #    else:
+                #        level_coords.append(0)
 
                 # Open the level file
                 if filename != None and filename != '':
@@ -127,20 +131,26 @@ while quitting == False:
                         for y in range(0, window_height, grid_size):
                             grid_coords.append((x, y))
 
-                    # Create a list of all the walls
+                    # Create a list of all the walls and players (walls are 1, seekers are 2, hiders are 3)
                     walls = []
+                    seekers = []
+                    hiders = []
                     for i in range(0, len(level_coords)):
                         if level_coords[i] == 1:
                             walls.append(grid_coords[i])
-                
-                    # Create a list of all the players (seeers are 2, hiders are 3)
-                    seekers = []
-                    hiders = []
-                    for i in range(0, len(level_coords)): 
-                        if level_coords[i] == 2:
+                        elif level_coords[i] == 2:
                             seekers.append(grid_coords[i])
                         elif level_coords[i] == 3:
                             hiders.append(grid_coords[i])
+                
+                    # Create a list of all the players (seeers are 2, hiders are 3)
+                    #seekers = []
+                    #hiders = []
+                    #for i in range(0, len(level_coords)): 
+                    #    if level_coords[i] == 2:
+                    #        seekers.append(grid_coords[i])
+                    #    elif level_coords[i] == 3:
+                    #        hiders.append(grid_coords[i])
 
             elif event.key == ord('c'):
                 # Clear the level
